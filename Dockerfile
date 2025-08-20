@@ -39,5 +39,6 @@ ENV VERSION="11"
 ENV RAM_SIZE="32G"
 ENV CPU_CORES="16"
 ENV DISK_SIZE="512G"
+ENV STORAGE_PATH="/storage"
 
 ENTRYPOINT ["/usr/bin/tini", "-s", "/run/entry.sh"]
