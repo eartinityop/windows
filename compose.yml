@@ -1,18 +1,18 @@
+version: '3.8'
+
 services:
   windows:
     image: dockurr/windows
     container_name: windows
     environment:
       VERSION: "11"
-      USERNAME: "Eartinity"  
-      PASSWORD: "Eartinity"
-      RAM_SIZE: "32G"
-      CPU_CORES: "16"
-      DISK_SIZE: "512G"
-      DISK2_SIZE: "100G"
-    devices:
-      - /dev/kvm
-      - /dev/net/tun
+      # Disable KVM requirement and use TCG emulation
+      QEMU_ARGS: "-accel tcg -cpu max"
+      # Add other QEMU parameters for better emulation
+      QEMU_EXTRA_ARGS: "-machine type=pc,accel=tcg -smp 6 -m 16G -vga std"
+    # Remove KVM device mapping since it's not available
+    # devices:
+    #   - /dev/kvm
     cap_add:
       - NET_ADMIN
     ports:
